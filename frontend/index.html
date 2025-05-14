@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Dashboard - WalletWise</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/sidebar.css">
+    <link rel="stylesheet" href="styles/payment.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle-btn" aria-label="Toggle Menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="dashboard-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" aria-label="Main Navigation">
+            <div class="sidebar-header">
+                <h1><i class="fas fa-wallet"></i> FundFlow</h1>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="#home-section" class="nav-link active" data-target="home-section"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#payments-section" class="nav-link" data-target="payments-section"><i class="fas fa-exchange-alt"></i> Payments</a></li>
+                <li><a href="#contacts-section" class="nav-link" data-target="contacts-section"><i class="fas fa-address-book"></i> Contacts</a></li>
+                <li><a href="#group-section" class="nav-link" data-target="group-section"><i class="fas fa-users"></i> Group</a></li> 
+                <li><a href="#bills-section" class="nav-link" data-target="bills-section"><i class="fas fa-file-invoice-dollar"></i> Bills & Recharge</a></li>
+                <li><a href="#activity-section" class="nav-link" data-target="activity-section"><i class="fas fa-list-alt"></i> Activity</a></li>
+                <li><a href="#settings-section" class="nav-link" data-target="settings-section"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+            <div class="sidebar-footer">
+                <button class="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</button>
+                <p>© 2025 FundFlow</p>
+            </div>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+
+            <!-- == Section: Home / Dashboard == -->
+            <section id="home-section" class="dashboard-section active">
+                 <header class="content-header">
+                    <h2>Dashboard</h2>
+                    <div class="balance-section">
+                        <span>Current Balance</span>
+                        <p class="balance-amount" id="balance-amount">$0.00</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="action-btn add-transaction-btn" id="openTransactionModalBtn">
+                            <i class="fas fa-edit"></i> Log Transaction
+                        </button>
+                        <button class="action-btn add-money-btn" id="addMoneyBtn">
+                            <i class="fas fa-plus-circle"></i> Add Money
+                        </button>
+                    </div>
+                </header>
+                <div class="card user-profile-card">
+                    <div class="profile-details">
+                        <h3 id="profileCardName">Loading...</h3>
+                        <div class="profile-upi">
+                            <label>UPI ID:</label>
+                            <span id="profileCardUpiId">username@walletwise</span>
+                            <button class="copy-btn" id="copyProfileUpiBtn" aria-label="Copy UPI ID"><i class="fas fa-copy"></i></button>
+                        </div>
+                        <div class="profile-phone">
+                            <span id="profileCardPhone">Not Set</span>
+                            <span class="upi-number-badge"><i class="fas fa-check-circle"></i> UPI Number</span>
+                        </div>
+                    </div>
+                    <div class="profile-visuals">
+                         <div class="profile-pic-container"> <img src="data:image/png;base64,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" alt="User Avatar" id="profileCardPic"></div> 
+                         <div class="profile-qr-container"> <img src="data:image/png;base64,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" alt="Your QR Code" id="profileCardQr"><a href="#" id="viewQrLink">View QR</a></div> 
+                    </div>
+                 </div>
+                <div class="home-grid">
+                    <div class="card transaction-history">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <ul id="transaction-list-home"><li class="transaction-item placeholder">Loading...</li></ul>
+                        <a href="#activity-section" class="view-all-link nav-link" data-target="activity-section">View All Activity →</a>
+                    </div>
+                    <div class="card quick-contacts">
+                        <h3><i class="fas fa-users"></i> Frequent Contacts</h3>
+                        <ul id="quick-contact-list"><li class="contact-item placeholder">Loading...</li></ul>
+                        <a href="#contacts-section" class="view-all-link nav-link" data-target="contacts-section">View All Contacts →</a>
+                    </div>
+                     <div class="card reminders"> <h3><i class="fas fa-bell"></i> Reminders</h3> <ul id="reminder-list"><li class="reminder-item placeholder">No active reminders.</li></ul> </div>
+                     <div class="card offers"> <h3><i class="fas fa-gift"></i> Offers & Rewards</h3> <div class="offer-item placeholder">No current offers.</div> </div>
+                </div>
+            </section>
+
+            <!-- == Section: Payments == -->
+            <section id="payments-section" class="dashboard-section">
+                 <header class="content-header"><h2>Payments</h2></header>
+                 <div class="payments-grid">
+                     <div class="card send-receive">
+                         <h3><i class="fas fa-paper-plane"></i> Send Money</h3>
+                         <form id="sendMoneyForm">
+                             <div class="form-group"><label for="recipient">To (Username/Email/Phone)</label><input type="text" id="recipient" name="recipient" placeholder="Enter identifier..." required></div>
+                             <div class="form-group"><label for="sendAmount">Amount ($)</label><input type="number" id="sendAmount" name="sendAmount" min="0.01" step="0.01" placeholder="0.00" required></div>
+                             <div class="form-group"><label for="sendNote">Note (Optional)</label><input type="text" id="sendNote" name="sendNote" placeholder="What's this for?"></div>
+                             <button type="submit" class="action-btn">Send Securely</button>
+                         </form>
+                         <hr>
+                         <div class="receive-options"> /* Placeholder */ <h3><i class="fas fa-qrcode"></i> Receive Money</h3> <p>...</p> <div class="upi-details">...</div> <div class="qr-code">...</div> </div>
+                     </div>
+                     <div class="card linked-accounts"> /* Placeholder */ <h3><i class="fas fa-university"></i> Linked Accounts</h3> <ul id="linkedAccountList"><li class="account-item placeholder">Not implemented.</li></ul> <button class="action-btn full-width">Link Account</button> </div>
+                 </div>
+                 <div class="card payment-history-snippet">
+                    <h3><i class="fas fa-history"></i> Recent Payments</h3>
+                    <ul id="payment-history-list"><li class="transaction-item placeholder">Loading...</li></ul>
+                    <a href="#activity-section" class="view-all-link nav-link" data-target="activity-section">View Full History →</a>
+                </div>
+            </section>
+
+            <!-- == Section: Contacts == -->
+            <section id="contacts-section" class="dashboard-section">
+                <header class="content-header">
+                    <h2>Contacts</h2>
+                    <div class="contacts-controls">
+                        <input type="search" id="contactSearch" placeholder="Search contacts...">
+                        <button class="action-btn"><i class="fas fa-plus"></i> Add Contact</button>
+                    </div>
+                </header>
+                <div class="card full-contacts-list">
+                    <h3><i class="fas fa-users"></i> All Contacts</h3>
+                    <ul id="contact-list-full"><li class="contact-list-item placeholder">Loading...</li></ul>
+                </div>
+            </section>
+
+             <!-- == Section: Group == -->
+             <section id="group-section" class="dashboard-section">
+                <header class="content-header">
+                    <h2>Groups</h2>
+                    <div class="header-actions">
+                        <button class="action-btn" id="createGroupBtn">
+                            <i class="fas fa-plus-circle"></i> Create Group
+                        </button>
+                    </div>
+                </header>
+                <div class="group-list-container card">
+                    <h3><i class="fas fa-layer-group"></i> Your Groups</h3>
+                    <ul id="group-list">
+                       
+                        <li class="group-item placeholder">Loading groups...</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Create Group Modal -->
+            <div class="modal" id="createGroupModal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-btn" id="closeCreateGroupModalBtn">×</span>
+                    <h2><i class="fas fa-users-cog"></i> Create New Group</h2>
+                    <form id="createGroupForm">
+                        <div class="form-group">
+                            <label for="groupNameInput">Group Name:</label>
+                            <input type="text" id="groupNameInput" name="groupName" required placeholder="e.g., Trip to Mountains">
+                        </div>
+                        <div class="form-group">
+                            <label for="groupMembersSelect">Add Members (select from your contacts):</label>
+                            <select id="groupMembersSelect" name="groupMembers" multiple required>
+                               
+                            </select>
+                            <small>Hold Ctrl/Cmd to select multiple members.</small>
+                        </div>
+                        <p class="error-message" id="createGroupError" style="text-align: center; margin-bottom: 15px;"></p>
+                        <button type="submit" class="action-btn submit-btn" id="submitCreateGroupBtn">
+                            Create Group <i class="fas fa-check"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contribute to Group Modal -->
+            <div class="modal" id="contributeGroupModal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close-btn" id="closeContributeGroupModalBtn">×</span>
+                    <h2 id="contributeGroupName">Contribute to [Group Name]</h2>
+                    <form id="contributeGroupForm">
+                        <input type="hidden" id="contributeGroupIdInput" name="groupId">
+                        <div class="form-group">
+                            <label for="contributionAmountInput">Amount to Contribute ($):</label>
+                            <input type="number" id="contributionAmountInput" name="contributionAmount" min="0.01" step="0.01" required placeholder="e.g., 20.00">
+                        </div>
+                        <p>Your current wallet balance: <span id="contributeModalUserBalance">$0.00</span></p>
+                        <p class="error-message" id="contributeGroupError" style="text-align: center; margin-bottom: 15px;"></p>
+                        <button type="submit" class="action-btn submit-btn" id="submitContributeGroupBtn">
+                            Contribute <i class="fas fa-donate"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+                <!-- Withdraw from Group Modal -->
+    <div class="modal" id="withdrawGroupModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="closeWithdrawGroupModalBtn">×</span>
+            <h2 id="withdrawGroupName">Withdraw from [Group Name]</h2>
+            <form id="withdrawGroupForm">
+                <input type="hidden" id="withdrawGroupIdInput" name="groupId">
+                <div class="form-group">
+                    <label for="withdrawalAmountInput">Amount to Withdraw ($):</label>
+                    <input type="number" id="withdrawalAmountInput" name="withdrawalAmount" min="0.01" step="0.01" required placeholder="e.g., 10.00">
+                </div>
+                <p>Your current contribution to this group: <strong id="withdrawModalUserContribution">$0.00</strong></p>
+                <p>Your current wallet balance: <span id="withdrawModalUserBalance">$0.00</span></p>
+                <p class="error-message" id="withdrawGroupError" style="text-align: center; margin-bottom: 15px;"></p>
+                <button type="submit" class="action-btn submit-btn" id="submitWithdrawGroupBtn">
+                    Withdraw Funds <i class="fas fa-hand-holding-usd"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+            <!-- == Section: Bills & Recharge == -->
+            <section id="bills-section" class="dashboard-section">
+                <header class="content-header"><h2>Bills & Recharge</h2></header>
+                 <div class="bills-grid">  <div class="card bill-category">...</div><div class="card bill-category">...</div><div class="card bill-category">...</div><div class="card bill-category">...</div><div class="card bill-category">...</div><div class="card bill-category">...</div> </div>
+                 <div class="card autopay-section">  <h3><i class="fas fa-sync-alt"></i> Autopay</h3> <p>Not implemented.</p> <button class="action-btn">Manage</button> </div>
+            </section>
+
+            <!-- == Section: Activity == -->
+            <section id="activity-section" class="dashboard-section">
+                 <header class="content-header"><h2>Transaction Activity</h2></header>
+                 <div class="card full-activity-log">
+                    <h3><i class="fas fa-list-ul"></i> Full Statement</h3>
+                    <div class="activity-filters">  <input type="text" placeholder="Search..."><select><option>All Types</option></select><select><option>All Status</option></select><button class="action-btn-small">Apply</button> </div>
+                    <ul id="full-transaction-list"><li class="transaction-item placeholder">Loading...</li></ul>
+                </div>
+            </section>
+
+            <!-- == Section: Settings / Profile == -->
+            <section id="settings-section" class="dashboard-section">
+                 <header class="content-header"><h2>Settings & Profile</h2></header>
+                 <div class="settings-grid">
+                     <div class="card profile-info">
+                        <h3><i class="fas fa-user-edit"></i> Personal Information</h3>
+                         <form id="profileForm">
+                            <div class="form-group"><label for="profileName">Full Name</label><input type="text" id="profileName" name="profileName" value=""></div>
+                            <div class="form-group"><label for="profileUsername">Username</label><input type="text" id="profileUsername" name="profileUsername" value="" disabled></div>
+                             <div class="form-group"><label for="profileEmail">Email Address</label><input type="email" id="profileEmail" name="profileEmail" value="" required disabled></div>
+                              <div class="form-group"><label for="profilePhone">Phone Number</label><input type="text" id="profilePhone" name="profilePhone" value="" required></div>
+                            <button type="submit" class="action-btn">Save Changes</button>
+                        </form>
+                    </div>
+                    <div class="card payment-methods-settings">  <h3><i class="fas fa-credit-card"></i> Payment Methods</h3><p>...</p><button>...</button></div>
+                    <div class="card security-settings"> <h3><i class="fas fa-shield-alt"></i> Security</h3><p>...</p></div>
+                    <div class="card notification-settings">  <h3><i class="fas fa-bell"></i> Notifications</h3><p>...</p></div>
+                 </div>
+            </section>
+        </main>
+
+    </div> 
+
+    <!-- Add Money Modal -->
+    <div class="modal" id="addMoneyModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModalBtn">×</span>
+            <div id="modalStageAmount">
+                <h2><i class="fas fa-money-bill-wave"></i> Add Funds</h2>
+                <form id="addMoneyForm">
+                    <div class="form-group"><label for="amountToAdd">Amount ($):</label><input type="number" id="amountToAdd" name="amountToAdd" min="1" step="0.01" required placeholder="e.g., 50.00"></div>
+                    <button type="submit" class="action-btn submit-btn">Proceed <i class="fas fa-arrow-right"></i></button>
+                </form>
+            </div>
+            <div id="modalStagePayment" style="display: none;">
+                 <h2><i class="fas fa-credit-card"></i> Payment Method</h2>
+                 <div id="paymentGatewayLoading" style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin fa-2x"></i><p>Loading...</p></div>
+                 <div id="paymentGatewayContent" style="display: none;"> 
+                    
+                 </div>
+                 <button class="action-btn-small modal-back-btn" id="modalBackToAmountBtn" style="margin-top: 15px;"><i class="fas fa-arrow-left"></i> Back</button>
+            </div>
+            <div id="modalStageSuccess" style="display: none; text-align: center;">
+                 <div class="success-icon">✔</div> <h2>Payment Complete</h2> <p id="successMessage">Funds added!</p> <p style="color: var(--text-dim);">Updating...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Transaction Modal -->
+    <div class="modal" id="addTransactionModal" style="display: none;">
+         <div class="modal-content">
+            <span class="close-btn" id="closeTransactionModalBtn">×</span>
+             <h2><i class="fas fa-edit"></i> Log Transaction</h2>
+             <form id="addTransactionForm">
+                 <div class="form-group"><label for="transactionType">Type:</label><select id="transactionType" required><option value="">--Select--</option><option value="expense">Expense</option><option value="income">Income</option></select></div>
+                 <div class="form-group"><label for="transactionAmount">Amount ($):</label><input type="number" id="transactionAmount" min="0.01" step="0.01" required placeholder="e.g., 25.50"></div>
+                  <div class="form-group"><label for="transactionDescription">Description:</label><input type="text" id="transactionDescription" placeholder="e.g., Groceries"></div>
+                 <button type="submit" class="action-btn submit-btn">Log Transaction <i class="fas fa-check"></i></button>
+             </form>
+         </div>
+     </div>
+
+     <!-- add contact-->
+
+         <!-- Add Contact Modal -->
+    <div class="modal" id="addContactModal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="closeAddContactModalBtn">×</span>
+            <h2><i class="fas fa-user-plus"></i> Add New Contact</h2>
+            <form id="addContactFormModal">
+                <div class="form-group">
+                    <label for="contactNameInput">Contact Name:</label>
+                    <input type="text" id="contactNameInput" name="contactName" required placeholder="e.g., Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label for="contactDetailInput">Contact Email:</label>
+                    <input type="email" id="contactDetailInput" name="contactDetail" required placeholder="e.g., jane.doe@example.com">
+                    <small style="color: var(--text-dim); font-size: 0.8em; display: block; margin-top: 5px;">We'll check if this user exists.</small>
+                </div>
+                <p class="error-message" id="contactModalError" style="text-align: center; margin-bottom: 15px;"></p> 
+                <button type="submit" class="action-btn submit-btn" id="submitAddContactBtn">
+                    Add Contact <i class="fas fa-check"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function fallbackToAlternativeCDN() {
+            console.log('Primary CDN failed, trying fallback...');
+            var script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js';
+            script.type = 'text/javascript';
+            document.head.appendChild(script);
+        }
+    </script>
+    
+    <script 
+        src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js" 
+        onerror="fallbackToAlternativeCDN()"
+        type="text/javascript">
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/supabase-config.js"></script>
+    <script src="scripts/jquery.min.js"></script> 
+    <script src="scripts/easyResponsiveTabs.js"></script> 
+    <script src="scripts/sidebar.js" defer></script>   
+    <script src="scripts/script.js" defer></script>
+</body>
+</html>

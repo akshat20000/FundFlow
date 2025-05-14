@@ -1,0 +1,21 @@
+{
+  "name": "badass_wallet",
+  "version": "1.0.0",
+  "description": "This repository contains the frontend code (HTML, CSS, JavaScript) for the Badass Digital Wallet project. It provides the initial user interface structure, styling, and basic interactivity for a modern digital wallet application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "@openzeppelin/contracts": "^5.3.0",
+    "hardhat": "^2.23.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0"
+  }
+}

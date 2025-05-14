@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WalletWise - Your Smart & Secure Digital Wallet</title> <!-- More engaging title -->
+    <link rel="stylesheet" href="styles/landing-style.css"> <!-- We will update this -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate on Scroll Library (Example) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="landing.html" class="logo">FundFlow <i class="fas fa-wallet"></i></a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#tech-stack">Technology</a></li>
+                    <li><a href="signin.html" class="btn btn-outline">Sign In</a></li>
+                    <li><a href="signup.html" class="btn btn-primary nav-signup">Sign Up</a></li>
+                </ul>
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </nav>
+         <!-- Mobile Menu (Hidden by default) -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#features">Features</a>
+            <a href="#tech-stack">Technology</a>
+            <hr>
+            <a href="signin.html">Sign In</a>
+            <a href="signup.html" class="btn btn-primary">Sign Up Free</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-background-gradient"></div>
+            <div class="container hero-content">
+                <div class="hero-text" data-aos="fade-right" data-aos-delay="100">
+                    <h1>Simple, Secure Digital<br>Finance Management.</h1>
+                    <p class="subtitle">FundFlow provides an intuitive platform to manage your balance, track transactions, and explore simulated Web3 payments securely.</p>
+                    <div class="hero-buttons">
+                        <a href="signup.html" class="btn btn-primary btn-lg">Create Free Account</a>
+                        <a href="#features" class="btn btn-secondary btn-lg">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-image" data-aos="fade-left" data-aos-delay="300">
+                   
+                    <img src="./images/FUNDFLOW_LOGO.png" alt="WalletWise Dashboard Mockup">
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 data-aos="fade-up">Core Wallet Features</h2>
+                <div class="features-grid">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                        <i class="fas fa-tachometer-alt fa-2x feature-icon"></i>
+                        <h3>Intuitive Dashboard</h3>
+                        <p>View your current balance and recent activity at a glance on a clean, modern interface.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                        <i class="fas fa-receipt fa-2x feature-icon"></i>
+                        <h3>Transaction History</h3>
+                        <p>Keep track of all your simulated income and expenses with a detailed activity log.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                        <i class="fas fa-users fa-2x feature-icon"></i>
+                        <h3>Contact Management</h3>
+                        <p>Save contacts and easily initiate simulated peer-to-peer transfers within the app.</p>
+                    </div>
+                     <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                        <i class="fab fa-ethereum fa-2x feature-icon"></i>
+                        <h3>Web3 Fund Addition</h3>
+                        <p>Simulate adding funds using various methods, including direct interaction with MetaMask on the Ethereum (Holesky) testnet.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section (Replaces Security Section for accuracy) -->
+        <section id="tech-stack" class="tech-stack">
+            <div class="container tech-stack-content">
+                 <div class="tech-stack-text" data-aos="fade-right">
+                    <h2>Built with Modern Tech</h2>
+                    <p>FundFlow leverages powerful tools for a robust and scalable foundation.</p>
+                    <ul>
+                        <li><i class="fas fa-database"></i><strong>Supabase:</strong> Open-source backend providing PostgreSQL database, real-time updates, and secure user authentication.</li>
+                        <li><i class="fab fa-ethereum"></i><strong>Ethereum & Solidity:</strong> Smart contract on the Holesky testnet handles simulated ETH deposits securely.</li>
+                        <li><i class="fab fa-js-square"></i><strong>MetaMask:</strong> Browser extension integration for user-controlled blockchain transaction signing.</li>
+                        <li><i class="fas fa-code"></i><strong>Vanilla JS, HTML, CSS:</strong> Lightweight and efficient frontend for a responsive user experience.</li>
+                    </ul>
+                     <p>Security is implemented through Supabase Auth (with password hashing) and user-controlled keys via MetaMask for blockchain operations.</p>
+                </div>
+                 <div class="tech-stack-image" data-aos="fade-left" data-aos-delay="200">
+                     <!-- Maybe logos of Supabase, Ethereum, MetaMask, JS -->
+                     <img src="images/fundflow-techused.png" alt="Technology Stack Logos">
+                     <!-- Placeholder: -->
+                     <!-- <img src="https://via.placeholder.com/400x300/16213e/e0e0e0?text=Tech+Stack" alt="Technology Stack Illustration"> -->
+                 </div>
+            </div>
+        </section>
+
+        <!-- Call to Action (CTA) Section -->
+        <section id="cta" class="cta">
+            <div class="container" data-aos="zoom-in">
+                <h2>Ready to Get Started?</h2>
+                <p>Experience simplified digital finance management. Create your WalletWise account today!</p>
+                <a href="signup.html" class="btn btn-primary btn-lg">Sign Up for Free</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    FundFlow<i class="fas fa-wallet"></i>
+                    <p>© 2025 FundFlowProject. All rights reserved.</p> <!-- Updated year if needed -->
+                     <p><small>Akshat Prashar & Aaryan</small></p> <!-- Add names -->
+                </div>
+                <div class="footer-links">
+                    <!-- Link these properly if they exist -->
+                    <a href="#">About (Placeholder)</a>
+                    <a href="#">Contact (Placeholder)</a>
+                     <!-- Link to your actual GitHub repo -->
+                    <a href="[YOUR_GITHUB_REPO_LINK]" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
+                </div>
+                <div class="footer-social">
+                    <!-- Add actual links if you have them -->
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Library JS -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- Your Landing Page Script -->
+    <script src="scripts/landing-script.js"></script>
+</body>
+</html>

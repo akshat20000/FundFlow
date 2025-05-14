@@ -1,0 +1,99 @@
+<div class="sap_tabs">
+    <div id="horizontalTab" style="display: block; width: 100%; margin: 0px;">
+        <div class="pay-tabs">
+            <h2>Select Payment Method</h2>
+            <ul class="resp-tabs-list">
+                <li class="resp-tab-item" aria-controls="tab_item-0" role="tab"><span><label class="pic1"></label>Credit Card</span></li>
+                <li class="resp-tab-item" aria-controls="tab_item-1" role="tab"><span><label class="pic3"></label>Net Banking</span></li>
+                <li class="resp-tab-item" aria-controls="tab_item-2" role="tab"><span><label class="pic4"></label>PayPal</span></li>
+                <li class="resp-tab-item" aria-controls="tab_item-3" role="tab"><span><label class="pic2"></label>Debit Card</span></li>
+                <li class="resp-tab-item" aria-controls="tab_item-4" role="tab"><span><i class="fab fa-ethereum" style="margin-right: 5px;"></i>MetaMask</span></li>
+                <div class="clear"></div>
+            </ul>
+        </div>
+        <div class="resp-tabs-container">
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-0">
+                <div class="payment-info">
+                    <h3 class="pay-title">Credit Card Info</h3>
+                    <form>
+                        <div class="tab-for">
+                            <h5>Amount</h5>
+                            <input class="pay-logo payment-amount-field" type="text" value="$0.00" required="" disabled>
+                        </div>
+                        <div class="tab-for">
+                            <h5>NAME ON CARD</h5>
+                             <input class="pay-logo" type="text" placeholder="Enter the name" required="">
+                            <h5>CARD NUMBER</h5>
+                            <input class="pay-logo" type="text" placeholder="0000-0000-0000-0000" required="">
+                        </div>
+                        <div class="transaction">
+                            <div class="tab-form-left user-form">
+                                <h5>EXPIRATION</h5>
+                                <ul>
+                                    <li><input type="number" class="text_box" placeholder="MM" min="1" max="12" /></li>
+                                    <li><input type="number" class="text_box" placeholder="YYYY" min="2024" /></li>
+                                </ul>
+                            </div>
+                            <div class="tab-form-right user-form-rt">
+                                <h5>CVV NUMBER</h5>
+                                <input type="password" placeholder="XXX" required="">
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <button type="button" class="action-btn confirm-btn">Confirm Payment</button>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-1">
+                <div class="payment-info">
+                    <h3>Net Banking</h3>
+                     <p>Select your bank (simulation only)</p>
+                     <button type="button" class="action-btn confirm-btn">Confirm Net Banking</button>
+                </div>
+            </div>
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-2">
+                <div class="payment-info">
+                    <h3>PayPal</h3>
+                     <p>Simulating PayPal flow...</p>
+                     <button type="button" class="action-btn confirm-btn">Confirm PayPal</button>
+                </div>
+            </div>
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-3">
+                 <div class="payment-info">
+                    <h3 class="pay-title">Debit Card Info</h3>
+                    <form>
+                         <div class="tab-for">
+                            <h5>Amount</h5>
+                            <input class="pay-logo payment-amount-field" type="text" value="$0.00" required="" disabled>
+                        </div>
+                         <button type="button" class="action-btn confirm-btn">Confirm Payment</button>
+                    </form>
+                </div>
+            </div>
+            <div class="tab-1 resp-tab-content" aria-labelledby="tab_item-4">
+                <div class="payment-info">
+                    <div class="metamask-container">
+                        <h3>Pay with MetaMask (Holesky)</h3>
+                        <p>Ensure MetaMask is installed and connected to the Holesky Testnet.</p>
+                        
+                        <div class="amount-info">
+                            <p>Amount (ETH): <span class="payment-amount-field-eth"></span></p>
+                        </div>
+
+                        <div class="metamask-status">
+                            <p id="metamaskStatusTab">Idle</p>
+                            <p id="metamaskAccountTab">Account: Not Connected</p>
+                            <p id="metamaskNetworkTab">Network: Not Connected</p>
+                            <p id="metamaskErrorTab" class="error-message"></p>
+                            <p id="metamaskTxTab" class="tx-hash"></p>
+                        </div>
+
+                        <button class="confirm-btn metamask-pay-btn" data-method="MetaMask">
+                            Connect & Pay with MetaMask
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - FundFlow</title> 
+    <link rel="stylesheet" href="styles/auth-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="scripts/supabase-config.js"></script>
+<script src="scripts/auth.js" defer></script>
+</head>
+<body>
+
+    <div class="auth-container">
+        <h2><i class="fas fa-wallet"></i> Sign In to FundFlow</h2> 
+
+        <form id="signInForm" class="auth-form">
+            <div class="form-group">
+                <label for="identifier">Email Address</label> 
+                <input type="email" id="identifier" name="identifier" placeholder="Enter your email" required>
+                 <div class="error-message" id="identifierError"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                 <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <button type="submit" class="action-btn">
+                Sign In <i class="fas fa-sign-in-alt"></i>
+            </button>
+        </form>
+
+        <div class="auth-links">
+            <a href="#">Forgot Password?</a> 
+            <span>|</span>
+            <a href="signup.html">Don't have an account? Sign Up</a>
+        </div>
+    </div>  
+</body>
+</html>

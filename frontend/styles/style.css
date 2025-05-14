@@ -1,0 +1,1808 @@
+:root {
+    --primary-bg: #1a1a2e; 
+    --secondary-bg: #16213e;
+    --card-bg: rgba(22, 33, 62, 0.8); 
+    --accent-color-1: #e94560; 
+    --accent-color-2: #0f3460;
+    --accent-glow: rgba(233, 69, 96, 0.4); 
+    --text-light: #e0e0e0;
+    --text-dim: rgba(224, 224, 224, 0.7); 
+    --text-heading: #ffffff; 
+    --positive: #2ecc71; 
+    --negative: #e74c3c; 
+    --pending-color: #f39c12; /* Orange for pending */
+    --gradient-main: linear-gradient(135deg, var(--accent-color-1), #a231a8);
+    --gradient-secondary: linear-gradient(135deg, #4facfe, #00f2fe); /* A blue gradient for contrast */
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-radius-main: 12px; /* Slightly sharper radius */
+    --box-shadow-main: 0 8px 25px rgba(0, 0, 0, 0.3);
+    --box-shadow-hover: 0 12px 35px rgba(0, 0, 0, 0.4);
+    --font-main: 'Poppins', sans-serif;
+    --sidebar-width: 260px;
+    --content-padding: 30px;
+    --transition-speed: 0.3s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth; /* Smooth scroll for anchor links */
+}
+
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--primary-bg);
+    background-image: linear-gradient(to bottom right, var(--primary-bg), var(--accent-color-2));
+    color: var(--text-light);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow: hidden; /* Prevent body scrollbars on desktop */
+}
+
+/* Custom Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--gradient-main);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+     background: linear-gradient(135deg, #ff6b8a, #c54cb2); /* Lighter gradient on hover */
+     background-clip: content-box;
+}
+
+/* --- Dashboard Layout --- */
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--secondary-bg);
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    border-right: 1px solid var(--border-color);
+    box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    transition: transform var(--transition-speed) ease, width var(--transition-speed) ease; /* Added width transition */
+}
+
+.sidebar-header {
+    padding: 0 25px 20px 25px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.sidebar-header h1 {
+    font-size: 1.8em;
+    background: var(--gradient-main);
+    background-clip: text;
+-webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    font-weight: 700;
+}
+.sidebar-header h1 i {
+    background: none;
+    -webkit-text-fill-color: initial; /* Reset gradient */
+    color: var(--accent-color-1);
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.sidebar-nav {
+    list-style: none;
+    flex-grow: 1;
+    overflow-y: auto; /* Scroll needed for content */
+     padding-right: 5px; /* Space for scrollbar */
+}
+
+.sidebar-nav li a.nav-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 25px;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-speed) ease;
+    border-left: 4px solid transparent;
+    position: relative; /* For potential pseudo-elements */
+}
+.sidebar-nav li a.nav-link i {
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+    font-size: 1.1em;
+    transition: color var(--transition-speed) ease;
+}
+
+.sidebar-nav li a.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: white;
+    border-left-color: var(--accent-color-2); /* Subtle hover border */
+    padding-left: 21px; /* Keep indent consistent */
+}
+.sidebar-nav li a.nav-link:hover i {
+    color: var(--accent-color-1);
+}
+
+
+.sidebar-nav li a.nav-link.active {
+    background: linear-gradient(90deg, rgba(233, 69, 96, 0.15) 0%, rgba(233, 69, 96, 0) 100%); /* Fading gradient bg */
+    color: white;
+    font-weight: 600;
+    border-left-color: var(--accent-color-1);
+    padding-left: 21px; /* Keep indent consistent */
+}
+.sidebar-nav li a.nav-link.active i {
+     color: var(--accent-color-1);
+}
+
+.sidebar-footer {
+    padding: 20px 25px 10px 25px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-size: 0.85em;
+}
+.sidebar-footer .logout-link {
+    color: var(--accent-color-1);
+    text-decoration: none;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+    transition: color var(--transition-speed) ease;
+}
+.sidebar-footer .logout-link:hover {
+    color: white;
+    text-shadow: 0 0 5px var(--accent-glow);
+}
+.sidebar-footer p {
+    color: rgba(255, 255, 255, 0.4);
+    margin: 0;
+    font-size: 0.9em;
+}
+
+/* --- Main Content Area --- */
+.main-content {
+    flex-grow: 1;
+    margin-left: var(--sidebar-width);
+    padding: var(--content-padding);
+    background-color: transparent; /* Let body background show through */
+    overflow-y: auto;
+    height: 100vh;
+    transition: margin-left var(--transition-speed) ease; /* For mobile sidebar toggle */
+}
+
+/* --- Dashboard Sections --- */
+.dashboard-section {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+.dashboard-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+
+/* --- Contacts Section Specific Styles --- */
+.contacts-controls {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-left: auto; /* Push controls to the right in header */
+}
+
+.contacts-controls input[type="search"] {
+    padding: 8px 15px;
+    border-radius: 20px; /* Pill shape search */
+    border: 1px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text-light);
+    font-family: var(--font-main);
+    min-width: 200px;
+    font-size: 0.9em;
+}
+.contacts-controls input[type="search"]::placeholder {
+    color: var(--text-dim);
+}
+.contacts-controls input[type="search"]:focus {
+     outline: none;
+    border-color: var(--accent-color-1);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.contacts-controls .action-btn {
+    padding: 8px 18px; /* Slightly smaller add button */
+    font-size: 0.9em;
+}
+
+/* Style for the full contact list */
+.full-contacts-list ul {
+    list-style: none;
+    /* No max-height needed here, let it grow */
+    overflow-y: auto; /* Add scroll if it becomes very long */
+}
+
+/* Specific styling for items in the full contacts list */
+.contact-list-item {
+    padding: 15px 10px; /* Consistent padding */
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color var(--transition-speed) ease;
+}
+.contact-list-item:last-child {
+    border-bottom: none;
+}
+.contact-list-item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.contact-list-item .contact-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-right: 15px;
+    overflow: hidden; /* Prevent long details from overflowing */
+}
+
+.contact-list-item .contact-info i {
+    margin-right: 15px;
+    color: var(--accent-color-1);
+    font-size: 1.8em; /* Larger icon for contact list */
+    width: 30px;
+    text-align: center;
+    flex-shrink: 0; /* Prevent icon shrinking */
+}
+
+.contact-list-item .contact-info .details {
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.contact-list-item .contact-info .details span {
+    display: block; /* Stack name and detail */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.contact-list-item .contact-info .details .contact-name {
+    font-weight: 600;
+    color: var(--text-light);
+    font-size: 1.05em;
+}
+.contact-list-item .contact-info .details .contact-detail {
+    font-size: 0.85em;
+    color: var(--text-dim);
+}
+
+.contact-list-item .contact-actions {
+    display: flex;
+    gap: 10px; /* Space between action buttons */
+    flex-shrink: 0; /* Prevent buttons from shrinking */
+}
+
+.contact-list-item.placeholder {
+    color: var(--text-dim);
+    font-style: italic;
+    justify-content: center;
+    opacity: 0.7;
+    padding: 20px;
+}
+
+
+/* --- Content Header --- */
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px; /* More space */
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.content-header h2 {
+    margin: 0;
+    font-size: 2em; /* Larger heading */
+    font-weight: 700;
+    color: var(--text-heading);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.content-header .balance-section {
+    text-align: right;
+}
+.content-header .balance-section span {
+    font-size: 0.9em;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 2px;
+}
+.content-header .balance-amount {
+    font-size: 1.8em; /* Larger balance */
+    font-weight: 700;
+    color: var(--text-heading);
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+
+/* --- General Card Styling --- */
+.card {
+    background-color: var(--card-bg);
+    backdrop-filter: blur(5px); /* Glassmorphism touch */
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-main);
+    padding: 25px 30px; /* Slightly more padding */
+    margin-bottom: var(--content-padding);
+    box-shadow: var(--box-shadow-main);
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.card h3 {
+    font-size: 1.4em; /* Slightly larger card titles */
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: var(--text-heading);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.card h3 i {
+    color: var(--accent-color-1);
+    margin-right: 12px;
+    font-size: 1.1em;
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* --- General Button Styling --- */
+.action-btn {
+    background: var(--gradient-main);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: inline-flex; /* Align icon and text */
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase; /* Uppercase text */
+    letter-spacing: 0.5px;
+}
+
+.action-btn i {
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.action-btn:hover, .action-btn:focus {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px var(--accent-glow);
+    outline: none;
+}
+.action-btn:active {
+    transform: translateY(-1px) scale(1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Smaller action button variant */
+.action-btn-small {
+    background: var(--accent-color-2);
+    color: var(--text-light);
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8em;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+    display: inline-flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+.action-btn-small:hover {
+    background: var(--accent-color-1);
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px var(--accent-glow);
+}
+.action-btn-small i { margin-right: 5px; color: inherit; font-size: 0.9em;} /* Inherit color */
+.action-btn-small.danger { background-color: var(--negative); }
+.action-btn-small.danger:hover { background-color: #c0392b; box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);}
+.action-btn.full-width { width: 100%; }
+
+/* --- Form Elements (From auth-style, adapted) --- */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9em;
+    color: var(--text-dim);
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background-color: rgba(0, 0, 0, 0.2); /* Darker input bg */
+    color: var(--text-light);
+    font-size: 1em;
+    font-family: var(--font-main);
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+.form-group input::placeholder,
+.form-group select {
+    color: var(--text-dim);
+    opacity: 0.8;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent-color-1);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.form-group select option {
+    background-color: var(--secondary-bg);
+    color: var(--text-light);
+}
+/* Remove spinners from number input */
+.form-group input[type="number"]::-webkit-inner-spin-button,
+.form-group input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.form-group input[type="number"] {
+    appearance: none;
+  -moz-appearance: textfield; /* Firefox */
+}
+/* Basic error message styling */
+.error-message {
+    color: var(--negative);
+    font-size: 0.85em;
+    margin-top: 5px; /* Space above error */
+    display: none; /* Hidden by default */
+}
+
+
+/* --- Specific Section Grids --- */
+.home-grid, .payments-grid, .settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--content-padding);
+}
+.bills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller items */
+    gap: var(--content-padding);
+}
+
+/* --- List Styles (Transactions, Contacts etc.) --- */
+.transaction-history ul, .quick-contacts ul, .reminders ul, .linked-accounts ul, .payment-history-snippet ul, .full-contacts-list ul {
+    list-style: none;
+    padding: 0; /* Remove default padding */
+}
+.transaction-history ul, .quick-contacts ul, .reminders ul, .linked-accounts ul, .payment-history-snippet ul {
+     max-height: 280px; /* Slightly more height */
+     overflow-y: auto;
+}
+.full-activity-log ul { max-height: none; overflow: visible; } /* No max height for full list */
+.full-contacts-list ul { overflow-y: auto; } /* Ensure scroll for long contact list */
+
+
+.transaction-item, .contact-item, .reminder-item, .offer-item, .account-item {
+    padding: 15px 5px; /* More padding */
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95em;
+    transition: background-color var(--transition-speed) ease;
+}
+.transaction-item:hover, .contact-item:hover, .reminder-item:hover, .offer-item:hover, .account-item:hover {
+    background-color: rgba(255, 255, 255, 0.03); /* Subtle hover */
+}
+
+.transaction-item:last-child, .contact-item:last-child, .reminder-item:last-child, .offer-item:last-child, .account-item:last-child {
+    border-bottom: none;
+}
+.transaction-item.placeholder, .contact-item.placeholder, .reminder-item.placeholder, .offer-item.placeholder, .account-item.placeholder {
+    color: var(--text-dim);
+    font-style: italic;
+    justify-content: center;
+    opacity: 0.7;
+    padding: 20px; /* Add padding for placeholder */
+}
+.transaction-item span:first-child, .contact-item span, .reminder-item span, .offer-item span, .account-item span {
+    flex-grow: 1;
+    margin-right: 10px;
+    color: var(--text-light);
+    overflow: hidden; /* Prevent text overflow */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.transaction-item .amount {
+    font-weight: 700;
+    font-size: 1.05em;
+    flex-shrink: 0; /* Prevent amount shrinking */
+}
+.amount.positive { color: var(--positive); text-shadow: 0 0 5px rgba(46, 204, 113, 0.5); }
+.amount.negative { color: var(--negative); text-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
+
+.contact-item i, .reminder-item i, .offer-item i, .account-item i {
+    margin-right: 12px;
+    color: var(--accent-color-1);
+    width: 20px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* --- Home Section Elements --- */
+.view-all-link {
+    display: block;
+    text-align: right;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--accent-color-1);
+    font-weight: 600;
+    text-decoration: none;
+}
+.view-all-link:hover {
+    text-decoration: underline;
+    color: white;
+}
+.offers .offer-item i { color: var(--gradient-secondary); /* Use blue gradient color */}
+
+
+/* --- Payments Section --- */
+.send-receive hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 30px 0;
+}
+.receive-options { margin-top: 20px; }
+.receive-options h3 { border: none; padding-bottom: 0; margin-bottom: 15px; }
+.upi-details, .qr-code { margin-bottom: 20px; }
+.upi-details strong, .qr-code strong { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-light); }
+.upi-details span {
+    color: white;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 5px; /* Space before copy button */
+    word-break: break-all;
+}
+.copy-btn {
+    background: none;
+    border: none;
+    color: var(--accent-color-1);
+    cursor: pointer;
+    margin-left: 5px; /* Reduced margin */
+    font-size: 1.1em;
+    transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    vertical-align: middle; /* Align better with text */
+}
+.copy-btn:hover { color: white; transform: scale(1.1); }
+.qr-code img {
+    max-width: 160px;
+    border: 5px solid var(--card-bg);
+    border-radius: 8px;
+    margin: 8px 0 15px 0;
+    background-color: white; /* Ensure QR code is visible */
+    padding: 5px; /* Padding around QR */
+}
+
+/* --- Bills Section --- */
+.bill-category {
+    text-align: center;
+    background-color: rgba(0,0,0,0.1); /* Slightly different bg */
+    padding: 30px 20px;
+}
+.bill-category i {
+    font-size: 2.8em;
+    margin-bottom: 15px;
+    display: block;
+    background: var(--gradient-secondary); /* Use blue gradient */
+    background-clip: text;
+-webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 3px 5px rgba(79, 172, 254, 0.3));
+}
+.bill-category h3 {
+    font-size: 1.1em;
+    border: none;
+    padding: 0;
+    margin-bottom: 5px;
+    justify-content: center;
+    color: var(--text-light);
+}
+.bill-category p {
+    font-size: 0.9em;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    min-height: 35px; /* Ensure consistent height */
+}
+.bill-category .action-btn {
+    width: 90%;
+    margin: 0 auto;
+    font-size: 0.9em;
+    padding: 10px 15px;
+}
+.autopay-section h3 { border: none; padding-bottom: 0; margin-bottom: 10px;}
+.autopay-section p { margin-bottom: 15px; color: var(--text-dim); }
+
+/* --- Activity Section --- */
+.activity-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+.activity-filters input[type="text"], .activity-filters select { flex-grow: 1; }
+.activity-filters button { flex-shrink: 0; }
+
+.full-activity-log .transaction-item {
+    align-items: flex-start;
+    padding: 18px 10px;
+}
+.full-activity-log .transaction-item div:first-child { flex-grow: 1; margin-right: 15px; }
+.full-activity-log .transaction-item span:first-child { font-weight: 600; margin-bottom: 4px; color: var(--text-light); display: flex; align-items: center; } /* Ensure icon aligns */
+.full-activity-log .transaction-item span:first-child i { margin-right: 8px; width: 16px; text-align: center; flex-shrink: 0;}
+.full-activity-log .transaction-item small { font-size: 0.85em; color: var(--text-dim); display: block; margin-top: 4px;} /* Ensure small is block */
+.full-activity-log .transaction-item .status-amount { text-align: right; flex-shrink: 0; }
+.full-activity-log .transaction-item .amount { display: block; margin-bottom: 5px; } /* Ensure amount is block */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px; /* Pill shape */
+    font-size: 0.75em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 0.5px;
+    min-width: 80px; /* Ensure minimum width */
+    text-align: center;
+}
+.status-badge.completed { background-color: var(--positive); box-shadow: 0 0 8px rgba(46, 204, 113, 0.5); }
+.status-badge.pending { background-color: var(--pending-color); box-shadow: 0 0 8px rgba(243, 156, 18, 0.5); }
+.status-badge.failed { background-color: var(--negative); box-shadow: 0 0 8px rgba(231, 76, 60, 0.5); }
+
+/* --- Settings Section --- */
+.settings-grid { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+.profile-info .form-group input:disabled {
+     background-color: rgba(0, 0, 0, 0.1);
+     opacity: 0.6;
+     cursor: not-allowed;
+}
+.payment-methods-settings hr { margin: 25px 0; border-color: var(--border-color); }
+.payment-methods-settings h4 { margin: 15px 0 10px 0; font-size: 1em; color: var(--text-light); font-weight: 600;}
+.setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.setting-item:last-child { border-bottom: none; }
+.setting-item span { font-weight: 500; color: var(--text-light); }
+/* Toggle Switch CSS (Keep as before, colors match) */
+.switch { position: relative; display: inline-block; width: 50px; height: 26px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.2); transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: var(--accent-color-1); }
+input:focus + .slider { box-shadow: 0 0 1px var(--accent-color-1); }
+input:checked + .slider:before { transform: translateX(24px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* --- Modal Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    backdrop-filter: blur(5px); /* Glassmorphism effect */
+    -webkit-backdrop-filter: blur(5px); /* Safari */
+    opacity: 0; /* Start hidden for animation */
+    transition: opacity 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Padding for small screens */
+}
+.modal.visible {
+    display: flex; /* Use flex to center content */
+    opacity: 1;
+}
+.modal-content {
+    background-color: var(--secondary-bg);
+    margin: auto;
+    padding: 30px 40px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-main);
+    width: 100%; /* Adjusted from 90% */
+    max-width: 500px; /* Increased max-width slightly for payment options */
+    box-shadow: var(--box-shadow-main);
+    position: relative;
+    transform: scale(0.9); /* Start smaller for animation */
+    transition: transform 0.3s ease-in-out, max-width 0.3s ease; /* Added max-width transition */
+    max-height: 90vh; /* Prevent modal overflow on short screens */
+    overflow-y: auto; /* Allow content scroll */
+}
+.modal.visible .modal-content { transform: scale(1); }
+.modal-content h2 {
+    color: var(--accent-color-1);
+    margin-bottom: 20px; /* More space */
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 700; /* Bold heading */
+    padding-bottom: 0; /* Remove potential inherited padding */
+    border: none; /* Remove potential inherited border */
+}
+.modal-content h2 i { margin-right: 10px; }
+.modal-content p {
+    margin-bottom: 25px;
+    text-align: center;
+    opacity: 0.9;
+    font-size: 0.95em;
+    color: var(--text-dim);
+}
+.close-btn {
+    color: var(--text-dim);
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 32px; /* Larger close button */
+    font-weight: bold;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease, transform var(--transition-speed) ease;
+    line-height: 1;
+    z-index: 10; /* Ensure it's above content */
+}
+.close-btn:hover,
+.close-btn:focus {
+    color: var(--accent-color-1);
+    text-decoration: none;
+    transform: rotate(90deg) scale(1.1);
+}
+.modal-content .form-group label { color: var(--text-dim); }
+.modal-content .action-btn { width: 100%; margin-top: 10px; } /* Full width submit */
+.gateway-info {
+    font-size: 0.85em;
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0.7;
+    color: var(--text-dim);
+}
+
+
+/* --- Responsive Design --- */
+.menu-toggle-btn { /* Hamburger Button */
+    display: none; /* Hidden on desktop */
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 102;
+    background: var(--secondary-bg);
+    color: var(--accent-color-1);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.4em; /* Bigger icon */
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    transition: all var(--transition-speed) ease;
+}
+.menu-toggle-btn:hover {
+    background-color: var(--accent-color-1);
+    color: white;
+}
+
+@media (max-width: 992px) {
+    :root { --sidebar-width: 220px; }
+    .main-content { margin-left: var(--sidebar-width); }
+    .home-grid, .payments-grid, .settings-grid {
+        grid-template-columns: 1fr; /* Stack cards sooner */
+    }
+    .bills-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+    :root { --sidebar-width: 0; --content-padding: 15px;} /* Collapse sidebar */
+
+    body { overflow-y: auto; } /* Allow body scroll on mobile */
+
+    .sidebar {
+        width: 250px; /* Set width for when it's open */
+        transform: translateX(-100%);
+        box-shadow: none;
+        z-index: 101;
+    }
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+    }
+    .main-content {
+        margin-left: 0;
+        padding: var(--content-padding);
+        padding-top: 75px; /* Space for toggle button */
+        height: auto; /* Allow content height to determine scroll */
+        min-height: calc(100vh - 75px); /* Ensure it takes at least screen height */
+    }
+    .menu-toggle-btn { display: block; }
+
+    .content-header { flex-direction: column; align-items: flex-start; margin-bottom: 25px;}
+    .content-header h2 { font-size: 1.8em; }
+    .content-header .balance-section { text-align: left; margin-top: 10px; }
+    .content-header .balance-amount { font-size: 1.6em;}
+
+    .home-grid, .payments-grid, .settings-grid, .bills-grid {
+        grid-template-columns: 1fr; /* Stack all cards */
+        gap: var(--content-padding);
+    }
+    .card { padding: 20px; }
+    .card h3 { font-size: 1.3em; margin-bottom: 20px; padding-bottom: 12px; }
+
+    .activity-filters { flex-direction: column; gap: 10px; padding: 15px; }
+    .activity-filters input, .activity-filters select, .activity-filters button { width: 100%; }
+
+    .full-activity-log .transaction-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+    .full-activity-log .transaction-item .status-amount { text-align: left; margin-top: 5px; }
+
+    .modal-content { width: 95%; padding: 25px 20px; max-width: 95%; } /* Adjust modal for mobile */
+    .contacts-controls {
+        margin-left: 0;
+        width: 100%;
+        margin-top: 15px;
+        flex-direction: column;
+        align-items: stretch;
+    }
+     .contacts-controls input[type="search"] {
+        min-width: auto;
+    }
+    .content-header {
+        padding-bottom: 10px;
+    }
+}
+
+/* --- User Profile Card Specific Styles --- */
+.user-profile-card {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px 30px;
+    margin-bottom: var(--content-padding); /* Space before the grid */
+    background: var(--gradient-main); /* Use gradient for emphasis */
+    color: white;
+    border: none; /* Override default card border */
+    box-shadow: var(--box-shadow-hover); /* Stronger shadow */
+}
+
+.user-profile-card .profile-details {
+    flex-grow: 1;
+    margin-right: 20px; /* Space between text and visuals */
+}
+
+.user-profile-card h3 { /* Target only h3 inside this card */
+    font-size: 1.8em;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: white;
+    border-bottom: none; /* Override card h3 border */
+    padding-bottom: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.user-profile-card h3 i { /* Hide default icon if present */
+    display: none;
+}
+
+
+.user-profile-card .profile-upi,
+.user-profile-card .profile-phone {
+    margin-bottom: 8px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; /* Wrap badge if needed */
+}
+
+.user-profile-card .profile-upi label {
+    font-weight: 600;
+    opacity: 0.8;
+    margin-right: 8px;
+}
+
+.user-profile-card .profile-upi span {
+    font-weight: 500;
+    margin-right: 5px;
+    word-break: break-all; /* Break long UPI IDs */
+}
+
+.user-profile-card .profile-phone span:first-child {
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.user-profile-card .copy-btn {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1em; /* Adjust size */
+    padding: 2px;
+}
+.user-profile-card .copy-btn:hover {
+    color: white;
+}
+
+.upi-number-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 3px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 4px; /* Ensure spacing if wrapped */
+}
+
+.upi-number-badge i {
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+.user-profile-card .profile-visuals {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Space between pic and QR */
+    flex-shrink: 0; /* Don't shrink visuals */
+}
+
+.profile-pic-container {
+    position: relative; /* For potential edit button */
+}
+
+#profileCardPic {
+    width: 80px; /* Profile picture size */
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    background-color: var(--secondary-bg); /* Placeholder bg */
+}
+
+.profile-qr-container {
+    text-align: center;
+}
+
+#profileCardQr {
+    display: block;
+    width: 60px; /* Smaller QR code */
+    height: 60px;
+    border-radius: 6px;
+    background-color: white; /* QR visibility */
+    padding: 4px;
+    margin: 0 auto 5px auto;
+    border: 1px solid var(--border-color);
+}
+
+#viewQrLink {
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+}
+#viewQrLink:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+/* QR Modal Specific Styles */
+/* Note: Add a specific class to the QR modal if you implement it */
+.qr-modal .modal-content {
+    max-width: 350px; /* Smaller modal for QR */
+    text-align: center;
+}
+
+#enlargedQrImage {
+    display: block;
+    width: 80%;
+    max-width: 250px;
+    height: auto;
+    margin: 15px auto 20px auto;
+    background-color: white; /* Ensure visibility */
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.qr-modal-content p { /* Style the UPI ID below QR */
+    font-weight: 600;
+    color: var(--text-light);
+    margin-bottom: 25px;
+    word-break: break-all;
+}
+
+
+/* Responsive adjustments for profile card */
+@media (max-width: 576px) {
+    .user-profile-card {
+        flex-direction: column; /* Stack vertically */
+        align-items: flex-start; /* Align left */
+        padding: 20px;
+    }
+    .user-profile-card .profile-details {
+        margin-right: 0;
+        margin-bottom: 20px; /* Space below details */
+        width: 100%; /* Take full width */
+    }
+    .user-profile-card h3 {
+        font-size: 1.6em;
+    }
+    .user-profile-card .profile-visuals {
+        width: 100%;
+        justify-content: flex-start; /* Align visuals left */
+        gap: 15px;
+    }
+    #profileCardPic {
+        width: 70px;
+        height: 70px;
+    }
+    #profileCardQr {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+/* --- Payment Gateway Integration Styles --- */
+
+/* Container loaded into modal */
+#paymentGatewayContent {
+    width: 100%;
+}
+
+/* General Tab Container */
+.sap_tabs {
+    clear: both;
+    padding: 0;
+}
+
+.pay-tabs {
+    margin: 0 0 2em 0;
+    padding: 1em 1em 1.5em 1em;
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-main) var(--border-radius-main) 0 0;
+}
+
+.pay-tabs h2 {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 25px;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.resp-tabs-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.resp-tab-item {
+    font-size: 0.9em;
+    color: var(--text-dim);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 12px 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all var(--transition-speed) ease;
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+}
+
+.resp-tab-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color-1);
+}
+
+.resp-tab-item.resp-tab-active {
+    background: var(--gradient-main);
+    color: white;
+    border-color: var(--accent-color-1);
+}
+
+.resp-tab-item label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Payment method icons using Font Awesome */
+.resp-tab-item .pic1::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f09d";
+    font-weight: 900;
+}
+
+.resp-tab-item .pic2::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f09d";
+    font-weight: 900;
+}
+
+.resp-tab-item .pic3::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f19c";
+    font-weight: 900;
+}
+
+.resp-tab-item .pic4::before {
+    font-family: "Font Awesome 5 Brands";
+    content: "\f1ed";
+}
+
+.resp-tabs-container {
+    padding: 20px;
+    background: var(--secondary-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 var(--border-radius-main) var(--border-radius-main);
+}
+
+.resp-tab-content {
+    display: none;
+}
+
+.resp-tab-content-active {
+    display: block;
+}
+
+.payment-info {
+    padding: 0;
+}
+
+.payment-info h3.pay-title {
+    font-size: 1.3em;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.payment-info .tab-for {
+    margin-bottom: 20px;
+}
+
+.payment-info .tab-for h5 {
+    color: var(--text-dim);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.payment-info input[type="text"],
+.payment-info input[type="password"],
+.payment-info input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 0.95em;
+    transition: all var(--transition-speed) ease;
+}
+
+.payment-info input:focus {
+    border-color: var(--accent-color-1);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.payment-info .transaction {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.payment-info .tab-form-left,
+.payment-info .tab-form-right {
+    flex: 1;
+}
+
+.payment-info .user-form ul {
+    display: flex;
+    gap: 10px;
+}
+
+.payment-info .user-form ul li {
+    flex: 1;
+}
+
+.payment-info .text_box {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    color: var(--text-light);
+    font-size: 0.95em;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .resp-tab-item {
+        font-size: 0.85em;
+        padding: 10px 15px;
+    }
+
+    .payment-info .transaction {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .resp-tabs-list {
+        flex-direction: column;
+    }
+
+    .resp-tab-item {
+        width: 100%;
+    }
+}
+
+/* --- Payment Gateway Styles --- */
+.payment-gateway {
+    background: var(--card-bg);
+    border-radius: var(--border-radius-main);
+    padding: 25px;
+    box-shadow: var(--box-shadow-main);
+}
+
+.payment-gateway-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.payment-gateway-header h3 {
+    color: var(--text-heading);
+    font-size: 1.4em;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.payment-gateway-header h3 i {
+    color: var(--accent-color-1);
+}
+
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.payment-method {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: var(--border-radius-main);
+    padding: 20px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.payment-method:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.payment-method.selected {
+    border-color: var(--accent-color-1);
+    background: linear-gradient(135deg, rgba(233, 69, 96, 0.1), rgba(233, 69, 96, 0.05));
+}
+
+.payment-method-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.payment-method-header i {
+    font-size: 1.5em;
+    color: var(--accent-color-1);
+    width: 30px;
+    text-align: center;
+}
+
+.payment-method-header h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.payment-form {
+    margin-top: 25px;
+}
+
+.payment-form .form-group {
+    margin-bottom: 20px;
+}
+
+.payment-form label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 0.95em;
+}
+
+.payment-form input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-main);
+    color: var(--text-light);
+    font-size: 1em;
+    transition: all var(--transition-speed) ease;
+}
+
+.payment-form input:focus {
+    outline: none;
+    border-color: var(--accent-color-1);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.payment-form input::placeholder {
+    color: var(--text-dim);
+}
+
+.card-details {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 15px;
+}
+
+.payment-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.payment-actions button {
+    flex: 1;
+    padding: 12px 25px;
+    border: none;
+    border-radius: var(--border-radius-main);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.payment-actions .back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+}
+
+.payment-actions .back-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.payment-actions .proceed-btn {
+    background: var(--gradient-main);
+    color: white;
+}
+
+.payment-actions .proceed-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--accent-glow);
+}
+
+/* Payment Method Icons */
+.payment-method i.fa-credit-card { color: #ff9f43; }
+.payment-method i.fa-university { color: #2ecc71; }
+.payment-method i.fa-paypal { color: #0984e3; }
+.payment-method i.fa-money-check { color: #00b894; }
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+    .payment-form input {
+        background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .payment-form input:focus {
+        background: rgba(0, 0, 0, 0.3);
+    }
+    
+    .payment-method {
+        background: rgba(0, 0, 0, 0.2);
+    }
+    
+    .payment-method:hover {
+        background: rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .payment-methods {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-details {
+        grid-template-columns: 1fr;
+    }
+    
+    .payment-actions {
+        flex-direction: column;
+    }
+    
+    .payment-form input {
+        padding: 15px;
+        font-size: 16px; /* Prevent zoom on mobile */
+    }
+}
+
+/* Easy Responsive Tabs CSS */
+.resp-tabs-list {
+    margin: 0;
+    padding: 0;
+}
+
+.resp-tabs-list li {
+    font-weight: 600;
+    font-size: 13px;
+    /* display: inline-block; */
+    padding: 13px 15px;
+    margin: 0 4px 0 0;
+    list-style: none;
+    cursor: pointer;
+    float: left;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+    color: var(--text-dim);
+}
+
+.resp-tabs-list li:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-light);
+}
+
+.resp-tabs-container {
+    padding: 0px;
+    background-color: var(--card-bg);
+    clear: left;
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 8px 8px;
+}
+
+.resp-tab-content {
+    display: none;
+    padding: 25px;
+}
+
+.resp-tab-active {
+    background: var(--gradient-main) !important;
+    color: #fff !important;
+    border-color: var(--accent-color-1) !important;
+}
+
+.resp-content-active,
+.resp-accordion-active {
+    display: block;
+}
+
+.resp-tab-content-active {
+    display: block;
+}
+
+/* Payment form styles within tabs */
+.payment-info {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.payment-info h3 {
+    color: var(--text-light);
+    font-size: 1.3em;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.payment-info .form-group {
+    margin-bottom: 20px;
+}
+
+.payment-info label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-dim);
+    font-weight: 500;
+}
+
+.payment-info input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    color: var(--text-light);
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+}
+
+.payment-info input:focus {
+    border-color: var(--accent-color-1);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    outline: none;
+}
+
+.payment-info .card-details {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    .resp-tabs-list li {
+        padding: 10px;
+        font-size: 12px;
+    }
+    
+    .resp-tab-content {
+        padding: 15px;
+    }
+    
+    .payment-info .card-details {
+        grid-template-columns: 1fr;
+    }
+}
+
+.contacts-controls .action-btn{
+    background: var(--gradient-main); /* Currently uses the pink gradient */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all var(--transition-speed) ease;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.action-btn i { /* Styles the icon inside */
+    margin-right: 8px;
+    font-size: 1.1em;
+}
+
+.action-btn:hover, .action-btn:focus { /* Hover/focus styles */
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 25px var(--accent-glow);
+    outline: none;
+}
+
+/* Add Contact Modal Error Message */
+#contactModalError {
+    color: var(--negative);
+    font-size: 0.9em;
+    min-height: 1.2em; /* Reserve space even when empty */
+    /* error-message class already handles display:none */
+}
+
+#group-list {
+    list-style: none;
+    padding: 0;
+}
+
+.group-item {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-main);
+    margin-bottom: 15px;
+    padding: 20px;
+    transition: all var(--transition-speed) ease;
+}
+
+.group-item:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    box-shadow: var(--box-shadow-hover);
+}
+
+.group-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.group-item-header h4 {
+    margin: 0;
+    font-size: 1.3em;
+    color: var(--text-light);
+    font-weight: 600;
+}
+.group-item-header h4 i {
+    margin-right: 10px;
+    color: var(--accent-color-1);
+}
+
+.group-total-contribution {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--positive);
+}
+
+.group-members-toggle {
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    cursor: pointer;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+}
+.group-members-toggle:hover {
+    color: var(--text-light);
+}
+.group-members-toggle i {
+    margin-left: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+.group-members-toggle.expanded i {
+    transform: rotate(180deg);
+}
+
+
+.group-members-list {
+    list-style: none;
+    padding-left: 0; /* No indent */
+    margin-top: 15px;
+    max-height: 0; /* Start collapsed */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: 10px;
+}
+.group-members-list.expanded {
+    max-height: 500px; /* Adjust as needed for max expected content */
+}
+
+
+.group-member-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.95em;
+    border-bottom: 1px dashed var(--border-color);
+}
+.group-member-item:last-child {
+    border-bottom: none;
+}
+.group-member-item .member-name {
+    color: var(--text-light);
+}
+.group-member-item .member-contribution {
+    color: var(--text-dim);
+    font-weight: 500;
+}
+
+.group-actions .action-btn-small {
+    margin-left: 10px;
+}
+
+/* Create Group Modal Select */
+#groupMembersSelect {
+    min-height: 100px; /* Make it easier to see multiple selections */
+}
+#groupMembersSelect option {
+    padding: 5px;
+}
+
+/* Placeholder styles */
+.group-item.placeholder {
+    text-align: center;
+    color: var(--text-dim);
+    font-style: italic;
+}
