@@ -1,8 +1,8 @@
 console.log("Attempting to run supabase-config.js..."); 
 
 if (typeof SUPABASE_URL === 'undefined') {
-    const SUPABASE_URL = 'https://mocvielzediwxbbwxlzd.supabase.co'; 
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vY3ZpZWx6ZWRpd3hiYnd4bHpkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU0MDA3MjksImV4cCI6MjA2MDk3NjcyOX0.orOacgcmEI0NUH_P2God4N_pHg3PB0FNlATTjdH0A_w'; // <-- YOUR ANON KEY HERE
+    const SUPABASE_URL = 'https://izbzygsalvqzmhhljqbs.supabase.co'; 
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml6Ynp5Z3NhbHZxem1oaGxqcWJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQyNzMzNTcsImV4cCI6MjA4OTg0OTM1N30.WZk7bPPEuQTHOWu4EwhBqmDBP1ufjbOEuGoHP-aDavw'; // <-- YOUR ANON KEY HERE
 
     try {
        
