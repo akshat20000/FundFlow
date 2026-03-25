@@ -10,7 +10,7 @@ const contractABI = [
 ];
 
 // Contract address - Replace with your deployed contract address
-const contractAddress = "0x86F9f9425BB6Fe671487472ad864531556b8ADec";
+const contractAddress = "0xbf3c70F804a92fBe17e0C18DA7347559Bc6B5ae4";
 
 let provider;
 let signer;
@@ -57,7 +57,6 @@ async function connectWallet() {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         handleAccountsChanged(accounts);
     } catch (error) {
-        console.error(error);
         showTransactionStatus('Failed to connect wallet', true);
     }
 }
@@ -88,7 +87,6 @@ async function updateBalance() {
         const balance = await contract.getBalance();
         walletBalance.textContent = `${ethers.utils.formatEther(balance)} ETH`;
     } catch (error) {
-        console.error(error);
         showTransactionStatus('Failed to fetch balance', true);
     }
 }
@@ -110,7 +108,6 @@ async function deposit() {
         showTransactionStatus('Deposit successful!', false);
         updateBalance();
     } catch (error) {
-        console.error(error);
         showTransactionStatus('Deposit failed: ' + error.message, true);
     }
 }
@@ -136,7 +133,6 @@ async function transfer() {
         showTransactionStatus('Transfer successful!', false);
         updateBalance();
     } catch (error) {
-        console.error(error);
         showTransactionStatus('Transfer failed: ' + error.message, true);
     }
 }
@@ -156,7 +152,6 @@ async function withdraw() {
         showTransactionStatus('Withdrawal successful!', false);
         updateBalance();
     } catch (error) {
-        console.error(error);
         showTransactionStatus('Withdrawal failed: ' + error.message, true);
     }
 }

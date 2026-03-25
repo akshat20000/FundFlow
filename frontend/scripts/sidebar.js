@@ -1,11 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Sidebar initializing (sidebar.js)..."); 
 
     const supabaseClient = window.supabaseClient;
     if (!supabaseClient) {
-       
-        console.error("FATAL ERROR: Supabase client not found in sidebar.js. Ensure supabase-config.js and its initialization run before sidebar.js.");
-       
+        console.error("Sidebar: Supabase client not found on window object! Check script loading order.");       
         return;
     }
 
@@ -28,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currentSection = storedSection;
     }
     
-    console.log(`Sidebar Init: Determined initial section = ${currentSection}`); 
     let isMobile = window.innerWidth <= 768;
     let isSidebarOpen = !isMobile; 
 
@@ -43,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             console.warn(`Sidebar: Attempted to navigate to non-existent section: ${sectionId}. Defaulting to home.`);
             sectionId = 'home-section'; 
         }
-        console.log('Sidebar: Updating section state to:', sectionId); 
+        console.log('Sidebar: Updating section state to:', sectionId);
         currentSection = sectionId;
         localStorage.setItem('currentSection', sectionId); 
         updateUI(); 
@@ -83,8 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function handleNavClick(e) {
         e.preventDefault(); 
-        const targetSection = e.currentTarget.getAttribute('data-target');
-        console.log('Sidebar: Nav click detected for target:', targetSection); 
+        const targetSection = e.currentTarget.getAttribute('data-target'); 
 
         if (targetSection) {
             updateSectionState(targetSection); 
@@ -113,7 +108,6 @@ document.addEventListener('DOMContentLoaded', () => {
         isSidebarOpen = force !== undefined ? force : !isSidebarOpen;
 
         if (isSidebarOpen !== previousState) {
-            console.log('Sidebar: Toggling sidebar. New state:', isSidebarOpen ? 'open' : 'closed'); 
             updateUI();
         }
     }
@@ -156,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             
-            console.error('Sidebar: CATCH block error during logout:', error); 
             alert('An unexpected error occurred during logout.');
             if (logoutBtn) {
                 logoutBtn.disabled = false; 
@@ -187,15 +180,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     sidebarNavLinks.forEach(link => {
-        console.log('Sidebar: Attaching nav click listener to:', link.getAttribute('data-target')); 
+       // console.log('Sidebar: Attaching nav click listener to:', link.getAttribute('data-target')); 
         link.addEventListener('click', handleNavClick);
     });
 
     if (menuToggleBtn) {
-        console.log('Sidebar: Attaching toggle listener to menuToggleBtn'); 
+       // console.log('Sidebar: Attaching toggle listener to menuToggleBtn'); 
         menuToggleBtn.addEventListener('click', () => toggleSidebar()); 
     } else {
-        console.warn("Sidebar: Mobile menu toggle button (.menu-toggle-btn) not found.");
+        //console.warn("Sidebar: Mobile menu toggle button (.menu-toggle-btn) not found.");
     }
 
     if (logoutBtn) {
